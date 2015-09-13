@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<script src="levels/level01.js"></script>
+		
+	
+		<script src="js/jquery-2.1.4.js" charset="utf-8"></script>
+		<script src="js/levels.js" charset="utf-8"></script>
+		<script>
+			var _rotation;
+			var _x;
+			var _y;
+			var _simulation;
+			var _commands = new Array();
+			var _commandCount;
+			var _collectedCoins;
+			var _coins; // mutable copy from the level
+			$(document).ready( function () {
+			console.log(_levels);
+				_level = _levels[_levelNr - 1];
+			
+				reset();
+				_simulation = true;
+				exec();
+				_simulation = false;
+				reset();
+				run();
+  			});
+			function reset() {
+				_coins = _level.coins.slice();
+				_collectedCoins = 0;
+				$(".td").css('background-image', "url('')");
+			
+				_rotation = _level.elephant.rotation;
+				_x = _level.elephant.x;
+				_y = _level.elephant.y;
+				updateElephant();
+				
+				var goal = $("#goal").detach();
+				$("#"+_level.goal.x+"_"+_level.goal.y).css('background-image', "url('img/goal.png')");
+				
+				_level.coins.forEach(function(coin, index) {
+					var img = $('<img class="coin" src="img/coin.png" />');
+					$("#"+coin.x+"_"+coin.y).css('background-image', "url('img/coin.png')");
+				});
+			}
+
+			function updateElephant() {
+				if (_simulation) {
+					return;
+				}
+				if (_x > 4 || _x < 0 || _y > 4 || _y < 0) {
+					alert("Elephant went out of bounds!");
+					return;
+				} 
+				$("#elephant").removeClass();
+				$("#elephant").addClass("e"+_rotation);
+				var e = $("#elephant").detach();
+				$("#"+_x+"_"+_y).append(e);
+				
+				var indexToRemove;
+				_coins.forEach(function(coin, index) {
+					if (coin.x == _x && coin.y == _y) {
+						$("#"+_x+"_"+_y).css('background-image', "url('')");
+						_collectedCoins++;
+						indexToRemove = index;
+						return;
+					}
+				});
+				if (indexToRemove) {
+					_coins.splice(indexToRemove, 1);	
+				}
+				
+				if (_x == _level.goal.x && _y == _level.goal.y) {
+					if (_collectedCoins == _level.coins.length) {
+						alert("You have reached your goal, well done!");	
+					} else {
+						console.log(_collectedCoins);
+						console.log(_level.coins.length);
+						alert("You didn't collect all coins!");
+					}
+				}
+			}
+			
+			function run() {
+				var d = 1000;
+				if (typeof delay !== 'undefined') {
+					d = delay;
+				}
+				_commandCount = _commands.length;
+				setTimeout(function () {
+					if (_commands.length > 0) {
+						var command = _commands[0];
+						
+						if (command.c == "move") {
+							_move();	
+						}
+						
+						if (command.c == "turnRight") {
+							_turnRight();	
+						}
+						
+						if (command.c == "turnLeft") {
+							_turnLeft();	
+						}
+						
+						_commands.splice(0, 1);
+						run();	
+					}
+				}, d);
+			}
+			
+			
+			// player actions
+			
+			function move() {
+				_move();
+				var command = {
+					c:"move"
+				};
+				_commands.push(command);
+			}
+			function _move() {
+				if (_rotation == 0) {
+					_x++;
+				} else if (_rotation == 90) {
+					_y++;
+				} else if (_rotation == 180) {
+					_x--;
+				} else if (_rotation == 270) {
+					_y--;
+				}
+				updateElephant();
+			}
+
+			function turnRight() {
+				_turnRight();
+				var command = {
+					c:"turnRight"
+				};
+				_commands.push(command);
+			}
+			function _turnRight() {
+				_rotation += 90;
+				if (_rotation == 360) {
+					_rotation = 0;
+				}
+				updateElephant();
+			}
+			
+			function turnLeft() {
+				_turnLeft();
+				var command = {
+					c:"turnLeft"
+				};
+				_commands.push(command);
+			}
+			function _turnLeft() {
+				_rotation -= 90;
+				if (_rotation == -90) {
+					_rotation = 270;
+				}
+				updateElephant();
+			}
+
+		</script>
+		<style type="text/css" media="screen">
+			#wrapper {
+				width: 250px;
+				margin: 20px auto 20px auto;
+			}
+			td {
+				border-width: 1px;
+				border-color: #dedede;
+				border-style: solid;
+				width: 54px;
+				height: 54px;
+				min-width: 54px;
+				min-height: 54px;
+				padding: 0;
+			}
+			.e0 {
+				-webkit-transform: rotate(0deg);
+			}
+			.e90 {
+				-webkit-transform: rotate(90deg);
+			}
+			.e180 {
+				-webkit-transform: rotate(180deg);
+			}
+			.e270 {
+				-webkit-transform: rotate(270deg);
+			}
+		</style>
+		<title>Basic Coding</title>
+	</head>
+	<body>
+		<img id='elephant' src='img/elephant.jpg'>
+		<div id="wrapper">
+			<table>
+				<tr>
+					<td id="0_0"></td>
+					<td id="1_0"></td>
+					<td id="2_0"></td>
+					<td id="3_0"></td>
+					<td id="4_0"></td>
+				</tr>
+				<tr>
+					<td id="0_1"></td>
+					<td id="1_1"></td>
+					<td id="2_1"></td>
+					<td id="3_1"></td>
+					<td id="4_1"></td>
+				</tr>
+				<tr>
+					<td id="0_2"></td>
+					<td id="1_2"></td>
+					<td id="2_2"></td>
+					<td id="3_2"></td>
+					<td id="4_2"></td>
+				</tr>
+				<tr>
+					<td id="0_3"></td>
+					<td id="1_3"></td>
+					<td id="2_3"></td>
+					<td id="3_3"></td>
+					<td id="4_3"></td>
+				</tr>
+				<tr>
+					<td id="0_4"></td>
+					<td id="1_4"></td>
+					<td id="2_4"></td>
+					<td id="3_4"></td>
+					<td id="4_4"></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
