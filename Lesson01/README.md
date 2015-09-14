@@ -18,3 +18,19 @@ The goal is to direct the elephant to collect all the coins and reach the target
 - More to come...
 
 You can use any other javascript code. So feel free to use loops, variables etc.
+
+## Levels
+### Level 1
+Get to know the commands.
+
+### Level 2
+How do loops work?
+
+### Level 3
+If statements.
+
+### Level 4
+Functions.
+
+### Level 5
+Handle random data.

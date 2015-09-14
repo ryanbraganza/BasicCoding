@@ -4,23 +4,53 @@ var _levels = new Array();
 _levels.push(
 	{
 		"elephant":{
-			"x":0,
-			"y":0,
-			"rotation":0
+			"x":0, "y":0, "rotation":0
 		},
 		"goal":{
-			"x":3,
-			"y":1
+			"x":3, "y":1
 		},
 		"coins":[
-			{
-				"x":1,
-				"y":0
-			},
-			{
-				"x":2,
-				"y":1
-			}
-		]
+			{"x":1, "y":0},
+			{"x":2, "y":1},
+		],
+		"holes":[],
+	}
+);
+
+
+// level 2
+_levels.push(
+	{
+		"elephant":{
+			"x":0, "y":0, "rotation":0
+		},
+		"goal":{
+			"x":9, "y":9
+		},
+		"coins":[],
+		"holes":[],
+	}
+);
+
+// level 3
+_levels.push(
+	{
+		"elephant":{
+			"x":0, "y":3, "rotation":0
+		},
+		"goal":{
+			"x":9, "y":3
+		},
+		"coins":[
+			{"x":2, "y":3},
+			{"x":4, "y":3},
+			{"x":5, "y":3},
+			{"x":6, "y":3},
+			{"x":8, "y":3},
+		],
+		"holes":[
+			{"x":3, "y":3},
+			{"x":7, "y":3},
+		],
 	}
 );
