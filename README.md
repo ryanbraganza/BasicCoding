@@ -1,4 +1,6 @@
-<img src="header.png" width="500px" align="center">
+<p align="center">
+	<img src="header.png" width="500px">
+</p>
 
 A course to teach beginners how to code. This repository contains material for the course, it is NOT the course itself.  
 Some material might be interesting though for people trying to do the same, so feel free to contact me.  
