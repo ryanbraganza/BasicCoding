@@ -6,7 +6,7 @@
 
 ## What is a level?
 
-![image](screenshot1.png =250x)
+<img src="screenshot1.png" width="250px">
 
 The goal is to direct the elephant to collect all the coins and reach the target (purple flag). Try doing it with using as few commands as possible!
 
