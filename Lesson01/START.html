@@ -43,6 +43,19 @@
 				updateElephant();
 				
 				var goal = $("#goal").detach();
+				if (_level.goal.x == -1 || _level.goal.y == -1) {
+					var good = false;
+					while (!good) {
+						good = true;
+						_level.goal.x = Math.floor(Math.random() * 8) + 1;
+						_level.goal.y = Math.floor(Math.random() * 8) + 1;
+						_level.holes.forEach(function(hole, index) {
+							if (_level.goal.x == hole.x && _level.goal.y == hole.y) {
+								good = false;
+							}
+						});
+					}			
+				}
 				$("#"+_level.goal.x+"_"+_level.goal.y).css('background-image', "url('img/goal.png')");
 				
 				_level.coins.forEach(function(coin, index) {
