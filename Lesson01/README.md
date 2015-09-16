@@ -6,7 +6,7 @@
 
 ## What is a level?
 
-![image](screenshot1.png =250x)
+<img src="screenshot1.png" width="250px">
 
 The goal is to direct the elephant to collect all the coins and reach the target (purple flag). Try doing it with using as few commands as possible!
 
@@ -39,5 +39,5 @@ Functions.
 Handle random data.
 
 ## Technical Stuff
-Each command basically executes immediatly without updating the UI, but updates the cordinates etc to provide information like "isFacingHole". Each command also adds itself into a queue. This queue will be executed in 1s delays (override `delay` variable for faster execution) and show the update in the UI.  
+Each command basically executes immediately without updating the UI, but updates the cordinates etc to provide information like "isFacingHole". Each command also adds itself into a queue. This queue will be executed in 1s delays (override `delay` variable for faster execution) and show the update in the UI.  
 If more than 5000 commands got called we assume we ran into a infinite loop and throw an exception. You'll see this in the console. This can happen pretty fast with using hasWon() inside a loop, so sometimes it's better to use a for loop with let's say `i < 50` to start working on a level.

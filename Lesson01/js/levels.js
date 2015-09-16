@@ -89,7 +89,7 @@ _levels.push(
 			"x":0, "y":0, "rotation":0
 		},
 		"goal":{
-			"x":0, "y":9
+			"x":-1, "y":-1 // -1 = random
 		},
 		"coins":[],
 		"holes":[
